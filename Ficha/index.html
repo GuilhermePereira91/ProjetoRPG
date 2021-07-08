@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Ficha do personagem</title>
+  </head>
+  <body>
+    <h1 class="title">Ficha do personagem</h1>
+
+    
+    <div id="diceAttributes" class="modal">
+      <div class="modal-content">
+        <img class="modalDice" src="./img/dado.png" alt="Dado" />
+        <h2 id="diceNumber"></h2>
+        <p id="diceType"></p>
+      </div>
+    </div>
+
+    <div id="lifeModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>MODIFICAR VIDA</h2>
+        <hr />
+        <form class="formModal" id="changeLife">
+          <h3>Atual</h3>
+          <input type="number" name="current" id="lifeCurrent" min="0" />
+          <h3>Máximo</h3>
+          <input type="number" name="max" id="lifeMax" min="0" />
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div id="ManaModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>MODIFICAR DINHEIRO</h2>
+        <hr />
+        <form class="formModal" id="changeMana">
+          <h3>Atual</h3>
+          <input
+            type="number"
+            name="ManaCurrent"
+            id="ManaCurrent"
+            min="0"
+          />
+          <h3>Máximo</h3>
+          <input type="number" name="ManaMax" id="ManaMax" min="0" />
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div id="addWeaponModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>ADICIONAR ARMA</h2>
+        <hr />
+        <form id="addWeaponForm" action="">
+          <table class="weapons" id="newWeapon">
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Dano</th>
+              <th>Num. Atual</th>
+              <th>Num. Máximo</th>
+              <th>Ataque</th>
+              <th>Alcance</th>
+              <th>Defeito</th>
+              <th>Área</th>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" name="weaponName" id="weaponName" />
+              </td>
+              <td>
+                <select id="weaponType" name="weaponType">
+                  <option value="fire">Arma</option>
+                  <option value="arch">Arremesso</option>
+                  <option value="fight">Briga</option>
+                  <option value="magic">Magias</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" name="weaponDamage" id="weaponDamege" />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="weaponNumCurrent"
+                  id="weaponNumCurrent"
+                />
+              </td>
+              <td>
+                <input type="text" name="weaponNumMax" id="weaponNumMax" />
+              </td>
+              <td>
+                <input type="text" name="weaponAttack" id="weaponAttack" />
+              </td>
+              <td>
+                <input type="text" name="weaponReach" id="weaponReach" />
+              </td>
+              <td>
+                <input type="text" name="weaponDefect" id="weaponDefect" />
+              </td>
+              <td>
+                <input type="text" name="weaponArea" id="weaponArea" />
+              </td>
+            </tr>
+          </table>
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="details border">
+        <h2 class="grid-title">DETALHES PESSOAIS</h2>
+        <hr />
+
+        <div class="inputs">
+          <h4>Nome</h4>
+          <input type="text" name="name" id="name" value="" />
+          <h4>Jogador</h4>
+          <input type="text" name="player" id="player" value="" />
+          <h4>Profissão</h4>
+          <input type="text" name="occupation" id="occupation" value="" />
+          <h4>Idade</h4>
+          <input type="text" name="age" id="age" value="" />
+          <h4>Sexo</h4>
+          <select id="sex" name="sex">
+            <option value="male">Masculino</option>
+            <option value="female">Feminino</option>
+          </select>
+          <h4>Altura</h4>
+          <input type="text" name="Altura" id="Altura" value="" />
+          <h4>Peso</h4>
+          <input type="text" name="Peso" id="Peso" value="" />
+          <h4>Classe</h4>
+          <input type="text" name="Classe" id="Classe" value="" />
+        </div>
+      </div>
+      <div class="character">
+        <div class="characterHeader">
+          <img class="characterPhoto" src="./img/character.png" alt="Foto" />
+          <img class="dice" src="./img/dado.png" alt="Dado" />
+        </div>
+
+        <div class="bars">
+          <h4>Vida</h4>
+          <div class="bar">
+            <div class="lifeBar" style="width: 0%">
+              <p class="barcount" id="lifeCount"></p>
+            </div>
+          </div>
+          <div class="checkboxs">
+            <form action="">
+              <input type="checkbox" id="lesion" name="lesion" value="lesion" />
+              <label for="lesion"> Lesão grave</label>
+              <input type="checkbox" id="dying" name="dying" value="dying" />
+              <label for="dying"> Morrendo</label>
+            </form>
+          </div>
+
+          <h4>Mana</h4>
+          <div class="Mana">
+            <div class="contentManaBar">
+              <div class="ManaBar" style="width: 0%">
+                <p class="barcount" id="ManaCount"></p>
+              </div>
+            </div>
+            <img class="ManaDice" src="./img/dado.png" alt="Dado" />
+          </div>
+        </div>
+
+        <div class="extra">
+          <div class="damage">
+            <p>Dano extra</p>
+            <input type="text" name="damage" id="damage" />
+          </div>
+          <div class="body">
+            <p>Armadura</p>
+            <input type="text" name="arm" id="arm" />
+          </div>
+          <div class="exposure">
+            <p>Experiência</p>
+            <input type="text" name="exp" id="exp" />
+          </div>
+          <div class="money">
+            <p>Dinheiro</p>
+            <input type="text" name="money" id="money" />
+          </div>
+        </div>
+      </div>
+      <div class="attributes border">
+        <h2 class="grid-title">ATRIBUTOS</h2>
+        <hr />
+
+        <div class="attributesList" id="attributesList"></div>
+      </div>
+      <div class="expertise border">
+        <h2 class="grid-title">PERICIA</h2>
+        <hr />
+        <div class="expertiseList" id="expertiseList"></div>
+      </div>
+      <div class="combat border">
+        <div class="combatHeader">
+          <h2 class="grid-title">EQUIPAMENTOS</h2>
+          <button id="addWeapon">&plus;</button>
+        </div>
+        <hr />
+
+        <table class="weapons" id="weapons">
+          <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Dano</th>
+            <th>Nun. Atual</th>
+            <th>Num. Máximo</th>
+            <th>Ataque</th>
+            <th>Alcance</th>
+            <th>Defeito</th>
+            <th>Área</th>
+          </tr>
+        </table>
+      </div>
+
+      <div class="story border">
+        <h2 class="grid-title">HISTÓRIA E DEFEITOS DO PERSONAGEM</h2>
+        <hr />
+        <div class="storyList" id="storyList"></div>
+      </div>
+    </div>
+
+    <!-- <div class="modal-overlay active">
+            <div class="modal">
+                <h2>MODIFICAR VIDA</h2>
+                <hr>
+                <form id="changeLife">
+                    <span class="modalspan">Atual</span>
+                    <input class="modalinput" type="number" name="current" id="lifeCurrent" min="0">
+
+                    <span class="modalspan">Máximo</span>
+                    <input class="modalinput" type="number" name="max" id="lifeMax" min="0">
+                    <input class="modalbutton" type="submit" value="Salvar">
+                </form>
+            </div>
+        </div> -->
+
+    <script src="characterSheet.js"></script>
+  </body>
+</html>
